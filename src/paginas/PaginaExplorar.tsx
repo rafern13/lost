@@ -3,7 +3,6 @@ import { Header } from "../componentes/Header";
 import { PessoaCard } from "../componentes/CartaoPessoaDesaparecida";
 import type { Pessoa } from "../tipos";
 
-// Simulando os dados da API
 const pessoas: Pessoa[] = [
     {
         id: 1,
@@ -59,7 +58,6 @@ const pessoas: Pessoa[] = [
         urlFoto: "https://images.unsplash.com/photo-1596707323287-3d6023d24294?q=80&w=1935&auto=format&fit=crop",
         ultimaOcorrencia: { localDesaparecimentoConcat: "Fortaleza, CE" },
     },
-    // Adicione mais dados simulados aqui se quiser
 ];
 
 export default function PaginaExplorar() {
