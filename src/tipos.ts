@@ -90,3 +90,9 @@ export type TextInputProps = {
     placeholder?: string,
     onChange: (value: string) => void;
 }
+
+export type DataInputProps = {
+  value: string,
+  label: string,
+  onChange: (value: string) => void,
+}

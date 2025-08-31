@@ -28,7 +28,7 @@ export function TextoInput({ label, placeholder, value, onChange }: TextInputPro
                 value={value}
                 onChange={handleInputChange}
             />
-            <p className={`text-red-500 bg-white text-sm mt-1 transition-opacity duration-300 ${isInvalid ? "opacity-100" : "opacity-0"}`}>
+            <p className={`text-red-500 text-sm mt-1 transition-opacity duration-300 ${isInvalid ? "opacity-100" : "opacity-0"}`}>
                 Somente caractéres.
             </p>
         </div>
