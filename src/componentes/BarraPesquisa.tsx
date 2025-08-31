@@ -1,74 +1,89 @@
 import { useState } from "react";
 import type { FiltrosPesquisa } from "../tipos";
-
+import { NumberInput } from "./NumberInput"; 
+import { SelectInput } from "./SelectInput";
+import { TextoInput } from "./InputTexto";
 
 type Prop = {
     onSearch: (filtros: FiltrosPesquisa) => void;
 }
 
-export function BarraPesquisa( { onSearch } : Prop) {
-    const [filtros, setFiltros] =  useState<FiltrosPesquisa>({
+export function BarraPesquisa({ onSearch }: Prop) {
+    const [filtros, setFiltros] = useState<FiltrosPesquisa>({
         nome: "",
         faixaIdadeInicial: "",
         faixaIdadeFinal: "",
         status: "",
     })
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const {name, value } = e.target;
-
-        setFiltros(prevFiltros => ({
-            ...prevFiltros,
-            [name]: value
-        }));
-    };
-
     const handleSearchClick = () => {
         onSearch(filtros)
     }
 
-    return(
-        <div className="flex flex-col md:flex-row gap-4 p-4 bg-white rounded-lg shadow-md">
-            <input
-                type="text"
-                name="nome"
-                placeholder="Nome"
+    const statusOptions = [
+        { value: "", label: "Status" },
+        { value: "ATIVO", label: "Ativo" },
+        { value: "INATIVO", label: "Inativo" },
+    ];
+
+    return (
+        <div className="flex flex-col md:flex-row justify-center items-baseline flex-wrap gap-4 p-4 bg-gray-100  rounded-lg shadow-md">
+            <TextoInput
+                label="Nome"
                 value={filtros.nome}
-                onChange={handleInputChange}
-                className="p-2 border rounded-md"
+                onChange={(value) => setFiltros(prevFiltros => ({...prevFiltros, nome: value}))}
             />
-            <input
-                type="number"
-                name="faixaIdadeInicial"
-                placeholder="Idade Inicial"
+            <NumberInput
+                label="Idade Inicial"
                 value={filtros.faixaIdadeInicial}
-                onChange={handleInputChange}
-                className="p-2 border rounded-md"
+                onChange={(value) => setFiltros(prevFiltros => ({ ...prevFiltros, faixaIdadeInicial: value }))}
             />
-            <input
-                type="number"
-                name="faixaIdadeFinal"
-                placeholder="Idade Final"
+            <NumberInput
+                label="Idade Final"
                 value={filtros.faixaIdadeFinal}
-                onChange={handleInputChange}
-                className="p-2 border rounded-md"
+                onChange={(value) => setFiltros(prevFiltros => ({ ...prevFiltros, faixaIdadeFinal: value }))}
             />
-            <select
-                name="sexo"
-                value={filtros.sexo}
-                onChange={handleInputChange}
-                className="p-2 border rounded-md"
-            >
-                <option value="">Sexo</option>
-                <option value="MASCULINO">Masculino</option>
-                <option value="FEMININO">Feminino</option>
-            </select>
-            <button
-                onClick={handleSearchClick}
-                className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
-            >
-                Pesquisar
-            </button>
+            <SelectInput
+                label="Status"
+                value={filtros.status}
+                options={statusOptions}
+                onChange={(value) => setFiltros(prevFiltros => ({ ...prevFiltros, status: value }))}
+            />
+
+            {/*Imita o layout de label + input + p dos botoes acima, para manter o alinhamento.*/}
+            <div className="flex flex-col justify-normal mb-1">
+                <label className="block text-sm font-medium text-white mb-1">
+                    .
+                </label>
+                <button
+                    onClick={handleSearchClick}
+                    className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+                >
+                    Filtrar
+                </button>
+                <p className="text-red-500 text-sm mt-1 transition-opacity duration-300 opacity-0">
+                    .
+                </p>
+            </div>
+            <div className="flex flex-col justify-normal mb-1">
+                <label className="block text-sm font-medium text-white mb-1">
+                    .
+                </label>
+                <button
+                    onClick={() => setFiltros({
+                        nome: "",
+                        faixaIdadeInicial: "",
+                        faixaIdadeFinal: "",
+                        status: "",
+                    })}
+                    className="bg-gray-300 text-black p-2 rounded-md hover:bg-gray-400"
+                >
+                    Limpar Filtro
+                </button>
+                <p className="text-red-500 text-sm mt-1 transition-opacity duration-300 opacity-0">
+                    .
+                </p>
+            </div>
         </div>
     );
 }

@@ -9,7 +9,7 @@ export function PessoaCard({ pessoa }: PessoaCardProps) {
   const statusColor = pessoa.vivo ? "text-green-600" : "text-red-600";
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+    <div className="bg-white w-full md:w-72 lg:w-80 h-64 shadow-lg overflow-hidden hover:shadow-xl transition">
       <img
         src={pessoa.urlFoto || "/placeholder.jpg"}
         alt={pessoa.nome}

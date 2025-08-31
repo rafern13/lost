@@ -59,9 +59,34 @@ empty: boolean;
 
 export type FiltrosPesquisa = {
   nome: string,
-  faixaIdadeInicial: string,
-  faixaIdadeFinal: string,
+  faixaIdadeInicial: string | number,
+  faixaIdadeFinal: string | number,
   sexo?: "MASCULINO" | "FEMININO",
   status: string,
 }
 
+export type InputConfig = {
+  label: string,
+  placeholder?: string,
+  value: string | number, 
+  onChange: (value: string | number) => void,
+}
+
+export type SelectOption = {
+  value: string;
+  label: string;
+}
+
+export type SelectInputProps = {
+  label: string;
+  value: string;
+  options: SelectOption[];
+  onChange: (value: string) => void;
+};
+
+export type TextInputProps = {
+    label: string;
+    value: string;
+    placeholder?: string,
+    onChange: (value: string) => void;
+}
